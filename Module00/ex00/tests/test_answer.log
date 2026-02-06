@@ -1,0 +1,120 @@
+TEST: ./megaphone "shhhhh... I think the students are asleep..."
+SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
+
+TEST: ./megaphone Damnit " ! " Sorry students, I thought this thing was off."
+DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
+
+TEST: ./megaphone
+* LOUD AND UNBEARABLE FEEDBACK NOISE *
+
+TEST: ./megaphone hello
+HELLO
+
+TEST: ./megaphone HELLO
+HELLO
+
+TEST: ./megaphone "hello world"
+HELLO WORLD
+
+TEST: ./megaphone hello world
+HELLOWORLD
+
+TEST: ./megaphone hello world test
+HELLOWORLDTEST
+
+TEST: ./megaphone "hello" "world" "test"
+HELLOWORLDTEST
+
+TEST: ./megaphone ""
+
+
+TEST: ./megaphone "hello" "" "world"
+HELLOWORLD
+
+TEST: ./megaphone "" "" ""
+
+
+TEST: ./megaphone a
+A
+
+TEST: ./megaphone A
+A
+
+TEST: ./megaphone abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+TEST: ./megaphone ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+TEST: ./megaphone "HeLLo WoRLd"
+HELLO WORLD
+
+TEST: ./megaphone 123456789
+123456789
+
+TEST: ./megaphone "!@#$%^&*()"
+!@#$%^&*()
+
+TEST: ./megaphone "test123!@#"
+TEST123!@#
+
+TEST: ./megaphone "hello123WORLD"
+HELLO123WORLD
+
+TEST: ./megaphone "   hello"
+   HELLO
+
+TEST: ./megaphone "hello   "
+HELLO   
+
+TEST: ./megaphone "hello     world"
+HELLO     WORLD
+
+TEST: ./megaphone " "
+ 
+
+TEST: ./megaphone "     "
+     
+
+TEST: ./megaphone "this is a test."
+THIS IS A TEST.
+
+TEST: ./megaphone "What time is it?"
+WHAT TIME IS IT?
+
+TEST: ./megaphone "WATCH OUT!"
+WATCH OUT!
+
+TEST: ./megaphone a b c d e
+ABCDE
+
+TEST: ./megaphone one two three four five
+ONETWOTHREEFOURFIVE
+
+TEST: ./megaphone "a" "b" "c" "d" "e"
+ABCDE
+
+TEST: ./megaphone "café"
+CAFé
+
+TEST: ./megaphone "naïve résumé"
+NAïVE RéSUMé
+
+TEST: ./megaphone "hello\nworld"
+HELLO\NWORLD
+
+TEST: ./megaphone "hello\tworld"
+HELLO\TWORLD
+
+TEST: ./megaphone "user@example.com"
+USER@EXAMPLE.COM
+
+TEST: ./megaphone "https://example.com"
+HTTPS://EXAMPLE.COM
+
+TEST: ./megaphone "C++ is fun"
+C++ IS FUN
+
+TEST: ./megaphone "42 is the answer"
+42 IS THE ANSWER
+
