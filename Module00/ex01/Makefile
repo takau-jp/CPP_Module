@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/06 17:30:48 by stanaka2          #+#    #+#              #
-#    Updated: 2026/02/12 13:33:02 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/02/12 13:20:47 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ RM = rm -f
 # 　　　　　　Target　　　      #
 # -------------------------- #
 
-NAME = megaphone
+NAME = my_awesome_phonebook
 
 # -------------------------- #
 # 　　　Compiler Flags        #
@@ -50,10 +50,18 @@ CXXFLAGS	+= -g
 endif
 
 # -------------------------- #
+#          Include           #
+# -------------------------- #
+
+INCLUDE_DIR	= include
+INCLUDE		= -I $(INCLUDE_DIR)
+
+# -------------------------- #
 #     Source Directories     #
 # -------------------------- #
 
-SRC_DIRS	=	src
+SRC_DIRS	=	src \
+				src/Class
 
 # -------------------------- #
 #        Source Files        #
@@ -61,7 +69,13 @@ SRC_DIRS	=	src
 
 
 SRCS	=	$(addprefix src/, \
-				megaphone.cpp \
+				add.cpp  displayContact.cpp    my_awesome_phonebook.cpp  selectContact.cpp \
+				displayPhoneBook.cpp  search.cpp \
+			)
+
+#Class
+SRCS	+=	$(addprefix src/Class/, \
+				Contact.cpp  PhoneBook.cpp \
 			)
 
 # -------------------------- #
@@ -128,7 +142,7 @@ $(NAME): $(OBJS)
 # $<: First prerequisite (the .cpp file)
 # $@: Target (the .o file)
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR) $(DEP_DIR)
-	@$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) $(DEPFLAGS) $(INCLUDE) -c $< -o $@
 
 # Create object directory if it doesn't exist
 # -: Ignore errors (no error if directory already exists)
@@ -161,12 +175,12 @@ sbuild:
 # -------------------------- #
 
 format:
-	@echo -e "[CPP_MODULE_00] $(BLUE)Run clang-format$(DEF_COLOR): *.cpp"
-	@clang-format -i $(SRCS)
+	@echo -e "[CPP_MODULE_00] $(BLUE)Run clang-format$(DEF_COLOR): *.cpp *.hpp"
+	@clang-format -i $(SRCS) $(INCLUDE_DIR)/*.hpp
 
 tidy:
 	@echo -e "[CPP_MODULE_00] $(BLUE)Run clang-tidy$(DEF_COLOR): *.cpp"
-	@/usr/bin/clang-tidy-12 $(SRCS) -- $(CXXFLAGS)
+	@/usr/bin/clang-tidy-12 $(SRCS) -- $(CXXFLAGS) $(INCLUDE)
 
 # -------------------------- #
 #       Cleanup Rules        #

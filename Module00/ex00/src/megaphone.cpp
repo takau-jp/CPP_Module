@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:48:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/07 01:52:25 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/02/11 21:39:46 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int toUpper(char c);
 template <typename InputIterator, typename OutputIterator,
 		  typename UnaryOperation>
-OutputIterator transform(InputIterator first, InputIterator last,
-						 OutputIterator result, UnaryOperation op);
+OutputIterator ft_transform(InputIterator first, InputIterator last,
+							OutputIterator result, UnaryOperation op);
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	if (argc == 1)
 	{
 		msg = "* loud and unbearable feedback noise *";
-		transform(msg.begin(), msg.end(), msg.begin(), toUpper);
+		ft_transform(msg.begin(), msg.end(), msg.begin(), toUpper);
 		std::cout << msg << std::endl;
 	}
 	else
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 		for (int i = 1; i < argc; ++i)
 		{
 			msg = argv[i];
-			transform(msg.begin(), msg.end(), msg.begin(), toUpper);
+			ft_transform(msg.begin(), msg.end(), msg.begin(), toUpper);
 			std::cout << msg;
 		}
 		std::cout << std::endl;
@@ -49,8 +49,8 @@ int toUpper(char c)
 
 template <typename InputIterator, typename OutputIterator,
 		  typename UnaryOperation>
-OutputIterator transform(InputIterator first, InputIterator last,
-						 OutputIterator result, UnaryOperation op)
+OutputIterator ft_transform(InputIterator first, InputIterator last,
+							OutputIterator result, UnaryOperation op)
 {
 	while (first != last)
 		*result++ = op(*first++);
