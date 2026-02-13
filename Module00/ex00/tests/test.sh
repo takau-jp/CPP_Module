@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/06 23:25:43 by stanaka2          #+#    #+#              #
-#    Updated: 2026/02/12 23:32:34 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/02/13 19:40:54 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ echo "
 
 "
 
-echo "TEST: ./megaphone Damnit \" ! \" "Sorry students, I thought this thing was off.\"
+echo "TEST: ./megaphone Damnit \" ! \" \"Sorry students, I thought this thing was off.\""
 ./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
 
 echo "
