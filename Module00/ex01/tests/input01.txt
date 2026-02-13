@@ -1,0 +1,46 @@
+SEARCH
+ADD
+So
+Tanaka
+12345
+abc
+hello world
+SEARCH
+1
+-1
+00
+0 
+ 0
++0
+-0
+0test
+2147483648
+0
+
+ADD
+
+HelloWorld
+
+HelloWorld
+
+HelloWorld
+
+HelloWorld
+
+HelloWorld
+SEARCH
+
+2
+1
+ADD
+Hello World
+Hello World
+Hello World
+Hello World
+Hello World
+SEARCH
+ADD
+SEARCH
+EXIT
+2
+EXIT

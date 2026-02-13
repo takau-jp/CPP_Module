@@ -1,0 +1,87 @@
+
+search
+add
+exit
+SEARCH
+"ADD"
+ADD
+ 0
+0 
+"0"
+'0'
+\0
+SEARCH
+0
+ADD
+          1
+         1
+        1
+       1
+      1
+SEARCH
+1
+ADD
+2          
+2         
+2        
+2       
+2      
+SEARCH
+2
+ADD
+	3
+3	
+		3
+			3
+3			
+SEARCH
+3
+ADD
+4!@#$%^&*()
+4_+}{:"?><
+4,./;'[]\|
+4=-
+4~`
+SEARCH
+4
+ADD
+5
+5
+5
+5
+5
+SEARCH
+5
+ADD
+6
+6
+6
+6
+6
+SEARCH
+6
+ADD
+7
+7
+7
+7
+7
+SEARCH
+7
+ADD
+8
+8
+8
+8
+8
+SEARCH
+8
+0
+ADD
+9
+9
+9
+9
+9
+SEARCH
+2

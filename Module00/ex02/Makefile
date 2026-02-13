@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/06 17:30:48 by stanaka2          #+#    #+#              #
-#    Updated: 2026/02/12 23:36:25 by stanaka2         ###   ########.fr        #
+#    Created: 2026/02/12 23:37:26 by stanaka2          #+#    #+#              #
+#    Updated: 2026/02/13 10:34:33 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # -------------------------- #
 #         Phony Rules        #
@@ -34,7 +35,7 @@ RM = rm -f
 # 　　　　　　Target　　　      #
 # -------------------------- #
 
-NAME = my_awesome_phonebook
+NAME = account
 
 # -------------------------- #
 # 　　　Compiler Flags        #
@@ -69,13 +70,12 @@ SRC_DIRS	=	src \
 
 
 SRCS	=	$(addprefix src/, \
-				add.cpp  displayContact.cpp    my_awesome_phonebook.cpp  selectContact.cpp \
-				displayPhoneBook.cpp  search.cpp \
+				tests.cpp \
 			)
 
 #Class
 SRCS	+=	$(addprefix src/Class/, \
-				Contact.cpp  PhoneBook.cpp \
+				Account.cpp \
 			)
 
 # -------------------------- #
@@ -206,7 +206,7 @@ re:	fclean all
 # -------------------------- #
 
 test:
-	bash tests/test.sh > tests/test.log
+	@bash tests/test.sh
 
 # -------------------------- #
 #  Include Dependency Files  #

@@ -46,7 +46,7 @@ static bool parseIntStrict(const std::string &input, int &index)
 {
 	std::stringstream ss(input);
 	ss >> index;
-	// !ss: conversion failed, 
+	// !ss: conversion failed,
 	// !ss.eof(): trailing non-digit chars (e.g."123abc")
 	if (!ss || !ss.eof())
 		return (false);
