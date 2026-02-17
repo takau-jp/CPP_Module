@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 20:00:55 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/02/16 00:06:26 by stanaka2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
+
+#include <iostream>
+#include <new>
+#include <string>
+
+class Zombie
+{
+  private:
+	std::string name;
+
+  public:
+	Zombie(std::string name);
+	~Zombie();
+	void announce(void);
+};
+
+Zombie *newZombie(std::string name);
+void randomChump(std::string name);
+
+#endif

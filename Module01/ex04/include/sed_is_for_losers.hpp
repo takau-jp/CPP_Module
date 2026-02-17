@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   sed_is_for_losers.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 20:00:44 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/16 00:19:34 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/02/16 17:32:50 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/02/17 01:19:40 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef SED_IS_FOR_LOSERS_HPP
+#define SED_IS_FOR_LOSERS_HPP
 
-Zombie *newZombie(std::string name)
-{
-	return (new Zombie(name));
-}
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include <string>
+
+std::string readFile(std::ifstream &infile);
+std::string ftReplace(std::string s, const std::string &from,
+					  const std::string &to);
+
+#endif
