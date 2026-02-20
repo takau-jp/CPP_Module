@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:00:42 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/17 16:05:29 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:05:32 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int main(void)
 		std::cout << std::endl;
 	}
 	catch (const std::bad_alloc &e)
+	{
+		std::cout << "Error: " << "Failed to allocate memory" << std::endl;
+	}
+	catch (const std::exception &e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}

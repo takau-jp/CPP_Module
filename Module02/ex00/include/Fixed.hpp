@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 20:00:51 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/18 19:04:04 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/02/18 16:45:59 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/02/19 23:19:11 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
-Zombie::Zombie(std::string name)
-{
-	this->name = name;
-	std::cout << "[" << this->name << "] constructor has called." << std::endl;
-}
+#include <iostream>
 
-Zombie::~Zombie()
+class Fixed
 {
-	std::cout << "[" << this->name << "] destractor has called." << std::endl;
-}
+	private:
+		static const int fractional_bits = 8;
+		int _raw_bits;
+	public:
+		Fixed();
+		Fixed(const Fixed &other);
+		~Fixed();
 
-void Zombie::announce(void)
-{
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
+		Fixed &operator=(const Fixed &other);
+		int getRawBits( void ) const;
+		void setRawBits( int const raw );
+};
+
+#endif
