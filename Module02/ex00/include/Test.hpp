@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Test.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 16:45:59 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/03/27 00:16:07 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/03/27 00:00:32 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/03/27 00:15:05 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#ifndef TEST_HPP
+# define TEST_HPP
 
-class Fixed
+# define DEF_COLOR \e[39m
+# define GRAY \e[90m
+# define RED \e[91m
+# define GREEN \e[92m
+# define YELLOW \e[93m
+# define BLUE \e[94m
+# define MAGENTA \e[95m
+# define CYAN \e[96m
+# define WHITE \e[97m
+
+class Test
 {
-	private:
-		static const int _fractional_bits = 8;
-		int _raw_bits;
-	public:
-		Fixed();
-		Fixed(const Fixed &other);
-		~Fixed();
-
-		Fixed &operator=(const Fixed &other);
-		int getRawBits( void ) const;
-		void setRawBits( int const raw );
+	
 };
 
 #endif

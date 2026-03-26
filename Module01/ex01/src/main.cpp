@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 00:46:53 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/17 16:05:36 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/02/25 01:04:57 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,7 @@ int main(void)
 		}
 		std::cout << std::endl;
 	}
-	catch (const std::invalid_argument &e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
-	catch (const std::bad_alloc &e)
+	catch (const std::exception &e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}

@@ -6,11 +6,12 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:48:58 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/19 23:37:10 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/03/27 00:16:17 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <iostream>
 
 Fixed::Fixed(): _raw_bits(0)
 {

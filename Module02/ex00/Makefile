@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/18 16:47:05 by stanaka2          #+#    #+#              #
-#    Updated: 2026/02/18 16:48:18 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/03/26 23:16:31 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,9 @@
 #      Makefile Setting      #
 # -------------------------- #
 
-SHELL =	/bin/bash
-
-ifeq ($(filter re,$(MAKECMDGOALS)),re)
-MAKEFLAGS += --no-print-directory
-else
-MAKEFLAGS += --no-print-directory -j
-endif
-
-RM = rm -f
+SHELL		=	/bin/bash
+MAKEFLAGS	+= --no-print-directory
+RM			= rm -f
 
 # -------------------------- #
 # 　　　　　　Target　　　      #
@@ -199,14 +193,9 @@ fclean:
 	@echo -e "[CPP_MODULE_02] $(BLUE)Deleted Target File and Object File Dir$(DEF_COLOR): $(NAME) $(OBJ_DIR) $(DEP_DIR)"
 
 # Full rebuild: clean everything and rebuild
-re:	fclean all
-
-# -------------------------- #
-#         Test Rules         #
-# -------------------------- #
-
-# test:
-# 	bash tests/test.sh > tests/test.log
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 # -------------------------- #
 #  Include Dependency Files  #

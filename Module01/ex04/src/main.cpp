@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 17:32:53 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/17 18:35:26 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/02/25 01:01:56 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int main(int argc, char **argv)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 		return (1);
+	}
+	catch (...)
+	{
+		std::cout << "Error: Some error occured!" << std::endl;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 18:05:28 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/17 18:25:47 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/02/25 01:25:11 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void Harl::error(void)
 	std::cout << std::endl;
 }
 
+#include <cassert>
+
 void Harl::complain(std::string level)
 {
 	static void (Harl::*comments[4])(void) = {&Harl::debug, &Harl::info,
@@ -65,15 +67,16 @@ void Harl::complain(std::string level)
 			{
 				case 0:
 					(this->*comments[0])();
+					/* falls through */
 				case 1:
 					(this->*comments[1])();
+					/* falls through */
 				case 2:
 					(this->*comments[2])();
+					/* falls through */
 				case 3:
 					(this->*comments[3])();
 					return;
-				default:
-					throw std::runtime_error("Unexpected LEVEL");
 			}
 		}
 	}
