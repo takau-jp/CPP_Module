@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Test.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/05 21:00:19 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/05 23:26:35 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/03/27 00:00:32 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/03/27 20:00:13 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef TEST_H
+# define TEST_H
 
-#include "Fixed.hpp"
-#include "Point.hpp"
+# define DEF_COLOR "\033[39m"
+# define GRAY "\033[90m"
+# define RED "\033[91m"
+# define GREEN "\033[92m"
+# define YELLOW "\033[93m"
+# define BLUE "\033[94m"
+# define MAGENTA "\033[95m"
+# define CYAN "\033[96m"
+# define WHITE "\033[97m"
 
-bool	bsp(Point const a, Point const b, Point const c, Point const point);
-
-int	main(void)
-{
-	Point	a;
-	Point	b(5, 5);
-	Point	c(5.0f, 1.0f);
-	Point	p(4, 3);
-	if (bsp(a, b , c, p))
-		std::cout << "inside" << std::endl;
-	else
-		std::cout << "outside or on the vertex or edge" << std::endl;
-}
+#endif

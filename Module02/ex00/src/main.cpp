@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 16:48:50 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/03/26 23:24:01 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/06 18:14:25 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int main( void ) {
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
 
-	// Original TEST
-	std::cout << "=====ORIGINAL TEST=====" << std::endl;
-	Fixed d;
-	std::cout << d.getRawBits() << std::endl;
-	d.setRawBits(42);
-	Fixed e(d);
-	Fixed f;
-	f = e;
-	std::cout << d.getRawBits() << std::endl;
-	std::cout << e.getRawBits() << std::endl;
-	std::cout << f.getRawBits() << std::endl;
+	// // Original TEST
+	// std::cout << "=====ORIGINAL TEST=====" << std::endl;
+	// Fixed d;
+	// std::cout << d.getRawBits() << std::endl;
+	// d.setRawBits(42);
+	// Fixed e(d);
+	// Fixed f;
+	// f = e;
+	// std::cout << d.getRawBits() << std::endl;
+	// std::cout << e.getRawBits() << std::endl;
+	// std::cout << f.getRawBits() << std::endl;
 	return 0;
 }

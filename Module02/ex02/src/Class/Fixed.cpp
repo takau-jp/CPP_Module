@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 20:41:34 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/25 23:47:02 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:57:47 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,7 @@ int Fixed::toInt() const
 	long raw = static_cast<long>(abs_raw >> Fixed::_fractional_bits);
 	if (this->isNegative())
 		raw = -raw;
-	return static_cast<int>(raw);
+	return (static_cast<int>(raw));
 }
 
 int Fixed::toIntRounded() const
@@ -353,7 +353,7 @@ int Fixed::toIntRounded() const
 		++raw;
 	if (this->isNegative())
 		raw = -raw;
-	return static_cast<int>(raw);
+	return (static_cast<int>(raw));
 }
 
 float Fixed::toFloat() const
@@ -463,4 +463,3 @@ Fixed operator/(const float num, const Fixed &fixed)
 {
 	return (Fixed(num) / fixed);
 }
-

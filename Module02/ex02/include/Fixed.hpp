@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 17:48:55 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/02/25 23:52:50 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:36:55 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ class Fixed
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
 	int toInt() const;
-
 	int toIntRounded() const;
 	float toFloat() const;
 
