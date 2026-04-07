@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/06 23:55:36 by stanaka2          #+#    #+#              #
-#    Updated: 2026/04/06 23:58:47 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/04/08 04:17:47 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ INCLUDE		= -I $(INCLUDE_DIR)
 SRC_DIRS	=	src \
 				src/Class
 
+SRC_DIRS	+=	test
+
 # -------------------------- #
 #        Source Files        #
 # -------------------------- #
@@ -69,6 +71,11 @@ SRCS	=	$(addprefix src/, \
 #Class
 SRCS	+=	$(addprefix src/Class/, \
 				ClapTrap.cpp \
+			)
+
+#test
+SRCS	+=	$(addprefix test/, \
+				catGame.cpp \
 			)
 
 # -------------------------- #
