@@ -6,7 +6,7 @@
 #    By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/06 23:55:36 by stanaka2          #+#    #+#              #
-#    Updated: 2026/04/08 04:17:47 by stanaka2         ###   ########.fr        #
+#    Updated: 2026/04/08 20:30:03 by stanaka2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRCS	+=	$(addprefix src/Class/, \
 
 #test
 SRCS	+=	$(addprefix test/, \
-				catGame.cpp \
+				game.cpp \
 			)
 
 # -------------------------- #

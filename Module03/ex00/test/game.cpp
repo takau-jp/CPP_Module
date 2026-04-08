@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   catGame.cpp                                        :+:      :+:    :+:   */
+/*   game.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 04:15:08 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/08 04:32:08 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:05:07 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <new>
 #include <sstream>
-#include <vector>
 
 #include "ClapTrap.hpp"
 
@@ -29,12 +29,11 @@ enum e_action
 	RANDOM
 };
 
-void printStatus(std::vector<ClapTrap> &cats);
+void printStatus(ClapTrap *cats, int cat_count);
 std::string hpBar(unsigned int hp);
-void doAction(std::vector<ClapTrap> &cats, int action);
-void printCat(int action);
+void doAction(ClapTrap *cats, int cat_count, int action);
 
-void catGame()
+void game()
 {
 	try
 	{
@@ -71,16 +70,15 @@ void catGame()
 			break;
 		}
 
-		std::vector<ClapTrap> cats;
-		cats.reserve(cat_count);
+		ClapTrap *cats = new ClapTrap[cat_count];
 		for (int i = 0; i < cat_count; ++i)
 		{
 			std::stringstream ss;
 			ss << i;
-			cats.push_back("cat" + ss.str());
+			cats[i] = ClapTrap("cat" + ss.str());
 		}
 
-		printStatus(cats);
+		printStatus(cats, cat_count);
 
 		std::string input;
 		while (true)
@@ -95,22 +93,24 @@ void catGame()
 				break;
 			std::cout << "\n" << std::endl;
 			if (input == "0")
-				doAction(cats, ATTACK);
+				doAction(cats, cat_count, ATTACK);
 			else if (input == "1")
-				doAction(cats, BE_REPAIRED);
+				doAction(cats, cat_count, BE_REPAIRED);
 			else if (input == "2")
-				doAction(cats, TAKE_DAMAGE);
+				doAction(cats, cat_count, TAKE_DAMAGE);
 			else if (input == "3")
 			{
 				std::cout << "EXIT\n" << std::endl;
 				break;
 			}
 			else
-				doAction(cats, RANDOM);
+				doAction(cats, cat_count, RANDOM);
 			std::cout << std::endl;
-			printStatus(cats);
+			printStatus(cats, cat_count);
 			std::cout << std::endl;
 		}
+
+		delete[] cats;
 	}
 	catch (const std::exception &e)
 	{
@@ -118,10 +118,10 @@ void catGame()
 	}
 }
 
-void printStatus(std::vector<ClapTrap> &cats)
+void printStatus(ClapTrap *cats, int cat_count)
 {
 	std::cout << "==================================" << std::endl;
-	for (size_t i = 0; i < cats.size(); ++i)
+	for (int i = 0; i < cat_count; ++i)
 	{
 		std::cout << " " << cats[i].getName() << "\tHP " << std::setw(3)
 				  << cats[i].getHitPoints() << " "
@@ -141,99 +141,43 @@ std::string hpBar(unsigned int hp)
 	return (bar);
 }
 
-void printCat(int action)
-{
-	if (action == ATTACK)
-	{
-		std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
-		std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
-		std::cout << "  /|   |\\        /|  |\\" << std::endl;
-		std::cout << " (_|   |_)      (_|  |_)" << std::endl;
-	}
-	else if (action == BE_REPAIRED)
-	{
-		std::cout << "   /\\_/\\" << std::endl;
-		std::cout << "  ( ^ω^ )  purr..." << std::endl;
-		std::cout << "  /| + |\\" << std::endl;
-		std::cout << " (_|   |_)" << std::endl;
-	}
-	else if (action == TAKE_DAMAGE)
-	{
-		std::cout << "   /\\_/\\" << std::endl;
-		std::cout << "  ( ;ω; )  * OUCH!" << std::endl;
-		std::cout << "  /|  |\\" << std::endl;
-		std::cout << " (_|  |_)" << std::endl;
-	}
-	else if (action == DEAD)
-	{
-		std::cout << "    |\\ _,,,---,,_" << std::endl;
-		std::cout << "    /,`.-'`'    -.  ;-;;,_" << std::endl;
-		std::cout << "   |,4-  ) )-,_..; \\ (  `'-'" << std::endl;
-		std::cout << "  '---''(_/--'  `-'\\_)" << std::endl;
-	}
-	else // NO_ENERGY
-	{
-		std::cout << "   /\\_/\\" << std::endl;
-		std::cout << "  ( -ω-)  zzz..." << std::endl;
-		std::cout << "  /|   |\\" << std::endl;
-		std::cout << " (_|   |_)" << std::endl;
-	}
-	std::cout << std::endl;
-}
-
-void doAction(std::vector<ClapTrap> &cats, int action)
+void doAction(ClapTrap *cats, int cat_count, int action)
 {
 	if (action == RANDOM)
 		action = rand() % 3; // 0: attack, 1: beRepaired, 2: takeDamage
 
 	if (action == ATTACK)
 	{
-		int attacker = rand() % cats.size();
-		int target = rand() % cats.size();
-		if (cats.size() != 1)
+		int attacker = rand() % cat_count;
+		int target = rand() % cat_count;
+		if (cat_count != 1)
 		{
 			while (attacker == target)
-				target = rand() % cats.size();
+				target = rand() % cat_count;
 		}
 
 		std::cout << cats[attacker].getName() << ".attack("
-				  << cats[target].getName() << ")\n"
-				  << std::endl;
-		if (!cats[attacker].getHitPoints())
-			printCat(DEAD);
-		else if (!cats[attacker].getEnergyPoints())
-			printCat(NO_ENERGY);
-		else
-			printCat(action);
+				  << cats[target].getName() << ")" << std::endl;
+
 		cats[attacker].attack(cats[target].getName());
 	}
 	else if (action == BE_REPAIRED)
 	{
-		int actor = rand() % cats.size();
+		int actor = rand() % cat_count;
 		unsigned int amount = rand() % 20;
 
-		std::cout << cats[actor].getName() << ".beRepaired(" << amount << ")\n"
+		std::cout << cats[actor].getName() << ".beRepaired(" << amount << ")"
 				  << std::endl;
-		if (!cats[actor].getHitPoints())
-			printCat(DEAD);
-		else if (!cats[actor].getEnergyPoints())
-			printCat(NO_ENERGY);
-		else
-			printCat(action);
 
 		cats[actor].beRepaired(amount);
 	}
 	else
 	{
-		int actor = rand() % cats.size();
+		int actor = rand() % cat_count;
 		unsigned int amount = rand() % 20;
 
-		std::cout << cats[actor].getName() << ".takeDamage(" << amount << ")\n"
+		std::cout << cats[actor].getName() << ".takeDamage(" << amount << ")"
 				  << std::endl;
-		if (!cats[actor].getHitPoints())
-			printCat(DEAD);
-		else
-			printCat(action);
 
 		cats[actor].takeDamage(amount);
 	}

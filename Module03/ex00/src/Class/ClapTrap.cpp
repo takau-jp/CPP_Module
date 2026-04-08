@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/08 01:17:48 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/08 21:39:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,37 @@
 ClapTrap::ClapTrap()
 	: _name("Unknown"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
-	std::cout << this->_name << ": Constructor has been called" << std::endl;
+	std::cout << this->_name << ": Default constructor has been called"
+			  << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(const std::string &name)
 	: _name(name), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
 	std::cout << this->_name << ": Constructor has been called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &other)
+	: _name(other._name), _hit_points(other._hit_points),
+	  _energy_points(other._energy_points), _attack_damage(other._attack_damage)
+{
+	std::cout << this->_name << ": Copy constructor has been called"
+			  << std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &other)
+{
+	if (this != &other)
+	{
+		this->_name = other._name;
+		this->_hit_points = other._hit_points;
+		this->_energy_points = other._energy_points;
+		this->_attack_damage = other._attack_damage;
+	}
+
+	std::cout << this->_name << ": Copy assignment operator has been called"
+			  << std::endl;
+	return (*this);
 }
 
 ClapTrap::~ClapTrap()
@@ -34,8 +58,24 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string &target)
 {
-	if (!isAlive() || !useEnergyPoints())
+	if (!isAlive())
+	{
+		printDead();
 		return;
+	}
+	if (!useEnergyPoints())
+	{
+		printNoEnergy();
+		return;
+	}
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
+	std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
+	std::cout << "  /|   |\\        /|  |\\" << std::endl;
+	std::cout << " (_|   |_)      (_|  |_)" << std::endl;
+	std::cout << std::endl;
+
 	if (this->_attack_damage <= 1)
 	{
 		std::cout << "ClapTrap " << this->_name << " attacks " << target
@@ -53,11 +93,23 @@ void ClapTrap::attack(const std::string &target)
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (!isAlive())
+	{
+		printDead();
 		return;
+	}
+
 	if (this->_hit_points >= amount)
 		this->_hit_points -= amount;
 	else
 		this->_hit_points = 0;
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( ;ω; )  * OUCH!" << std::endl;
+	std::cout << "  /|  |\\" << std::endl;
+	std::cout << " (_|  |_)" << std::endl;
+	std::cout << std::endl;
+
 	if (amount <= 1)
 	{
 		std::cout << "ClapTrap " << this->_name << " takes " << amount
@@ -72,12 +124,29 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (!isAlive() || !useEnergyPoints())
+	if (!isAlive())
+	{
+		printDead();
 		return;
+	}
+	if (!useEnergyPoints())
+	{
+		printNoEnergy();
+		return;
+	}
+
 	if (std::numeric_limits<unsigned int>::max() - amount >= this->_hit_points)
 		this->_hit_points += amount;
 	else
 		this->_hit_points = std::numeric_limits<unsigned int>::max();
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( ^ω^ )  purr..." << std::endl;
+	std::cout << "  /| + |\\" << std::endl;
+	std::cout << " (_|   |_)" << std::endl;
+	std::cout << std::endl;
+
 	if (amount <= 1)
 	{
 		std::cout << "ClapTrap " << this->_name << " repaires " << amount
@@ -113,21 +182,39 @@ unsigned int ClapTrap::getAttackDamage(void) const
 bool ClapTrap::isAlive(void) const
 {
 	if (this->_hit_points == 0)
-	{
-		std::cout << "ClapTrap " << this->_name << " is dead!" << std::endl;
 		return (false);
-	}
 	return (true);
+}
+
+void ClapTrap::printDead(void) const
+{
+	std::cout << std::endl;
+	std::cout << "   |\\ _,,,---,,_" << std::endl;
+	std::cout << "   /,`.-'`'    -.  ;-;;,_" << std::endl;
+	std::cout << "  |,4-  ) )-,_..; \\ (  `'-'" << std::endl;
+	std::cout << " '---''(_/--'  `-'\\_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ClapTrap " << this->_name << " is dead!" << std::endl;
 }
 
 bool ClapTrap::useEnergyPoints(void)
 {
 	if (this->_energy_points == 0)
-	{
-		std::cout << "ClapTrap " << this->_name
-				  << " doesn't have any energy point!" << std::endl;
 		return (false);
-	}
 	this->_energy_points--;
 	return (true);
+}
+
+void ClapTrap::printNoEnergy(void) const
+{
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( -ω-)  zzz..." << std::endl;
+	std::cout << "  /|   |\\" << std::endl;
+	std::cout << " (_|   |_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ClapTrap " << this->_name << " doesn't have any energy point!"
+			  << std::endl;
 }
