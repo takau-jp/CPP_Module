@@ -1,0 +1,186 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/09 01:20:19 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/04/09 02:48:45 by stanaka2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ScavTrap.hpp"
+
+#include <iostream>
+#include <limits>
+
+ScavTrap::ScavTrap() : ClapTrap("Unknown", 100, 50, 20)
+{
+	std::cout << "ScavTrap: " << this->getName()
+			  << ": Default constructor has been called" << std::endl;
+}
+
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name, 100, 50, 20)
+{
+	std::cout << "ScavTrap: " << this->getName()
+			  << ": Constructor has been called" << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
+{
+	std::cout << "ScavTrap: " << this->getName()
+			  << ": Copy constructor has been called" << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &other)
+{
+	if (this != &other)
+	{
+		ClapTrap::operator=(other);
+	}
+
+	std::cout << this->getName() << ": Copy assignment operator has been called"
+			  << std::endl;
+	return (*this);
+}
+
+ScavTrap::~ScavTrap()
+{
+	std::cout << "ScavTrap: " << this->getName()
+			  << ": Destructor has been called" << std::endl;
+}
+
+void ScavTrap::attack(const std::string &target)
+{
+	if (!isAlive())
+	{
+		printDead();
+		return;
+	}
+	if (!useEnergyPoints())
+	{
+		printNoEnergy();
+		return;
+	}
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
+	std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
+	std::cout << "  /|   |\\        /|  |\\" << std::endl;
+	std::cout << " (_|   |_)      (_|  |_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName() << " attacks " << target
+			  << ", causing " << this->getAttackDamage();
+	if (this->getAttackDamage() <= 1)
+		std::cout << " point of damage!" << std::endl;
+	else
+		std::cout << " points of damage!" << std::endl;
+}
+
+void ScavTrap::takeDamage(unsigned int amount)
+{
+	if (!isAlive())
+	{
+		printDead();
+		return;
+	}
+
+	if (this->getHitPoints() >= amount)
+		this->setHitPoints(this->getHitPoints() - amount);
+	else
+		this->setHitPoints(0);
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( ;ω; )  * OUCH!" << std::endl;
+	std::cout << "  /|  |\\" << std::endl;
+	std::cout << " (_|  |_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName() << " takes " << amount;
+	if (amount <= 1)
+		std::cout << " point of damage!" << std::endl;
+	else
+		std::cout << " points of damage!" << std::endl;
+}
+
+void ScavTrap::beRepaired(unsigned int amount)
+{
+	if (!isAlive())
+	{
+		printDead();
+		return;
+	}
+	if (!useEnergyPoints())
+	{
+		printNoEnergy();
+		return;
+	}
+
+	if (std::numeric_limits<unsigned int>::max() - amount >=
+		this->getHitPoints())
+	{
+		this->setHitPoints(this->getHitPoints() + amount);
+	}
+	else
+		this->setHitPoints(std::numeric_limits<unsigned int>::max());
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( ^ω^ )  purr..." << std::endl;
+	std::cout << "  /| + |\\" << std::endl;
+	std::cout << " (_|   |_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName() << " repaires " << amount;
+	if (amount <= 1)
+		std::cout << " point of hit points!" << std::endl;
+	else
+		std::cout << " point of hit points!" << std::endl;
+}
+
+void ScavTrap::guardGate()
+{
+	if (!isAlive())
+	{
+		printDead();
+		return;
+	}
+
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( -ω- )  Guard Gate!!" << std::endl;
+	std::cout << "  /|   |\\" << std::endl;
+	std::cout << " (_|___|_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName()
+			  << "chenge to [Guard Gate] mode." << std::endl;
+}
+
+void ScavTrap::printDead(void) const
+{
+	std::cout << std::endl;
+	std::cout << "   |\\ _,,,---,,_" << std::endl;
+	std::cout << "   /,`.-'`'    -.  ;-;;,_" << std::endl;
+	std::cout << "  |,4-  ) )-,_..; \\ (  `'-'" << std::endl;
+	std::cout << " '---''(_/--'  `-'\\_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName() << " is dead!" << std::endl;
+}
+
+void ScavTrap::printNoEnergy(void) const
+{
+	std::cout << std::endl;
+	std::cout << "   /\\_/\\" << std::endl;
+	std::cout << "  ( -ω-)  zzz..." << std::endl;
+	std::cout << "  /|   |\\" << std::endl;
+	std::cout << " (_|   |_)" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "ScavTrap: " << this->getName()
+			  << " doesn't have any energy point!" << std::endl;
+}
