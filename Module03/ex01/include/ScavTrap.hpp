@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 22:41:42 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 02:42:07 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/14 19:32:13 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ class ScavTrap : public ClapTrap
 
   public:
 	ScavTrap();
-	ScavTrap(const std::string &name);
+	explicit ScavTrap(const std::string &name);
 	ScavTrap(const ScavTrap &other);
 	ScavTrap &operator=(const ScavTrap &other);
-	~ScavTrap();
+	virtual ~ScavTrap();
 
 	void attack(const std::string &target);
 	void takeDamage(unsigned int amount);

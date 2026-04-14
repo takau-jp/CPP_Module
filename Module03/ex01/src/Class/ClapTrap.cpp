@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 02:40:09 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:13:35 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void ClapTrap::attack(const std::string &target)
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
 	std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
-	std::cout << "  /|   |\\        /|  |\\" << std::endl;
-	std::cout << " (_|   |_)      (_|  |_)" << std::endl;
+	std::cout << "  /|    \\        /|  |\\" << std::endl;
+	std::cout << " (_|    _)      (_|  |_)" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "ClapTrap: " << this->_name << " attacks " << target
@@ -103,10 +103,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		return;
 	}
 
-	if (this->_hit_points >= amount)
-		this->_hit_points -= amount;
-	else
-		this->_hit_points = 0;
+	loseHitPoints(amount);
 
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\" << std::endl;
@@ -135,10 +132,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return;
 	}
 
-	if (std::numeric_limits<unsigned int>::max() - amount >= this->_hit_points)
-		this->_hit_points += amount;
-	else
-		this->_hit_points = std::numeric_limits<unsigned int>::max();
+	gainHitPoints(amount);
 
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\" << std::endl;
@@ -222,4 +216,20 @@ void ClapTrap::printNoEnergy(void) const
 
 	std::cout << "ClapTrap: " << this->_name
 			  << " doesn't have any energy point!" << std::endl;
+}
+
+void ClapTrap::loseHitPoints(unsigned int amount)
+{
+	if (this->_hit_points >= amount)
+		this->_hit_points -= amount;
+	else
+		this->_hit_points = 0;
+}
+
+void ClapTrap::gainHitPoints(unsigned int amount)
+{
+	if (std::numeric_limits<unsigned int>::max() - amount >= this->_hit_points)
+		this->_hit_points += amount;
+	else
+		this->_hit_points = std::numeric_limits<unsigned int>::max();
 }

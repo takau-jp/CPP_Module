@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 01:20:19 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 02:48:45 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:59:16 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 		ClapTrap::operator=(other);
 	}
 
-	std::cout << this->getName() << ": Copy assignment operator has been called"
-			  << std::endl;
+	std::cout << "ScavTrap: " << this->getName()
+			  << ": Copy assignment operator has been called" << std::endl;
 	return (*this);
 }
 
@@ -67,8 +67,8 @@ void ScavTrap::attack(const std::string &target)
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
 	std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
-	std::cout << "  /|   |\\        /|  |\\" << std::endl;
-	std::cout << " (_|   |_)      (_|  |_)" << std::endl;
+	std::cout << "  /|    \\        /|  |\\" << std::endl;
+	std::cout << " (_|    _)      (_|  |_)" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "ScavTrap: " << this->getName() << " attacks " << target
@@ -87,10 +87,7 @@ void ScavTrap::takeDamage(unsigned int amount)
 		return;
 	}
 
-	if (this->getHitPoints() >= amount)
-		this->setHitPoints(this->getHitPoints() - amount);
-	else
-		this->setHitPoints(0);
+	loseHitPoints(amount);
 
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\" << std::endl;
@@ -119,13 +116,7 @@ void ScavTrap::beRepaired(unsigned int amount)
 		return;
 	}
 
-	if (std::numeric_limits<unsigned int>::max() - amount >=
-		this->getHitPoints())
-	{
-		this->setHitPoints(this->getHitPoints() + amount);
-	}
-	else
-		this->setHitPoints(std::numeric_limits<unsigned int>::max());
+	gainHitPoints(amount);
 
 	std::cout << std::endl;
 	std::cout << "   /\\_/\\" << std::endl;
@@ -138,7 +129,7 @@ void ScavTrap::beRepaired(unsigned int amount)
 	if (amount <= 1)
 		std::cout << " point of hit points!" << std::endl;
 	else
-		std::cout << " point of hit points!" << std::endl;
+		std::cout << " points of hit points!" << std::endl;
 }
 
 void ScavTrap::guardGate()
@@ -157,7 +148,7 @@ void ScavTrap::guardGate()
 	std::cout << std::endl;
 
 	std::cout << "ScavTrap: " << this->getName()
-			  << "chenge to [Guard Gate] mode." << std::endl;
+			  << " change to [Guard Gate] mode." << std::endl;
 }
 
 void ScavTrap::printDead(void) const

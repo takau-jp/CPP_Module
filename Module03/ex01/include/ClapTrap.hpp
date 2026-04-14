@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:38 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 02:41:34 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/14 19:32:05 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ class ClapTrap
 	bool useEnergyPoints(void);
 	void setHitPoints(unsigned int hit_points);
 	void setEnergyPoints(unsigned int energy_points);
+	void loseHitPoints(unsigned int amount);
+	void gainHitPoints(unsigned int amount);
 
   public:
 	ClapTrap();
-	ClapTrap(const std::string &name);
+	explicit ClapTrap(const std::string &name);
 	ClapTrap(const ClapTrap &other);
 	ClapTrap &operator=(const ClapTrap &other);
-	~ClapTrap();
+	virtual ~ClapTrap();
 
 	void attack(const std::string &target);
 	void takeDamage(unsigned int amount);

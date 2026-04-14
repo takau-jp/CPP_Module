@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:38 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 02:32:04 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/09 20:29:47 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ class ClapTrap
 	void printDead(void) const;
 	bool useEnergyPoints(void);
 	void printNoEnergy(void) const;
+	void loseHitPoints(unsigned int amount);
+	void gainHitPoints(unsigned int amount);
 
   public:
 	ClapTrap();
-	ClapTrap(const std::string &name);
+	explicit ClapTrap(const std::string &name);
 	ClapTrap(const ClapTrap &other);
 	ClapTrap &operator=(const ClapTrap &other);
 	~ClapTrap();

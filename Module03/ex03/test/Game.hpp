@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Game.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/08 00:39:57 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 19:21:15 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/04/14 00:00:00 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/04/14 00:00:00 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#ifndef GAME_HPP
+# define GAME_HPP
 
-#include <iostream>
+# include "DiamondTrap.hpp"
 
-int main(void)
+enum e_action
 {
-	ScavTrap Tom("Tom");
+	ATTACK,
+	BE_REPAIRED,
+	WHO_AM_I,
+	GUARD_GATE,
+	HIGH_FIVES,
+	RANDOM
+};
 
-	std::cout << std::endl;
-	Tom.attack("Alice");
-	Tom.takeDamage(10);
-	Tom.beRepaired(20);
-	Tom.guardGate();
-}
+class Game
+{
+  private:
+	DiamondTrap **_diamonds;
+	int           _count;
 
-// // Game Mode
-// void game(void);
+	void printStatus() const;
+	bool isOver() const;
+	bool doTurn(void);
 
-// int main(void)
-// {
-// 	game();
-// }
+  public:
+	Game(int count);
+	~Game();
+	void run();
+};
+
+void game(void);
+
+#endif

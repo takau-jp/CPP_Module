@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 04:15:08 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/08 21:05:07 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/14 19:52:45 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ enum e_action
 	ATTACK,
 	BE_REPAIRED,
 	TAKE_DAMAGE,
-	DEAD,
-	NO_ENERGY,
 	RANDOM
 };
 
@@ -35,6 +33,8 @@ void doAction(ClapTrap *cats, int cat_count, int action);
 
 void game()
 {
+	ClapTrap *cats = NULL;
+
 	try
 	{
 		srand(std::time(NULL));
@@ -70,7 +70,7 @@ void game()
 			break;
 		}
 
-		ClapTrap *cats = new ClapTrap[cat_count];
+		cats = new ClapTrap[cat_count];
 		for (int i = 0; i < cat_count; ++i)
 		{
 			std::stringstream ss;
@@ -109,13 +109,13 @@ void game()
 			printStatus(cats, cat_count);
 			std::cout << std::endl;
 		}
-
-		delete[] cats;
 	}
 	catch (const std::exception &e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
+
+	delete[] cats;
 }
 
 void printStatus(ClapTrap *cats, int cat_count)

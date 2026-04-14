@@ -48,7 +48,7 @@ endif
 # -------------------------- #
 
 INCLUDE_DIR	= include
-INCLUDE		= -I $(INCLUDE_DIR)
+INCLUDE		= -I $(INCLUDE_DIR) -I test
 
 # -------------------------- #
 #     Source Directories     #

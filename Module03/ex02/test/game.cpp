@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/08 04:15:08 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 18:42:51 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/04/14 18:30:00 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/04/14 18:44:46 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <sstream>
 
 #include "Game.hpp"
-#include "ScavTrap.hpp"
 
 static int getTeamSize(const std::string &team_name);
 static std::string hpBar(unsigned int hp, unsigned int max_hp);
@@ -26,19 +25,19 @@ void game(void)
 {
 	try
 	{
-		int clap_count = getTeamSize("Clap");
-		if (clap_count < 0)
-		{
-			std::cout << std::endl;
-			return;
-		}
 		int scav_count = getTeamSize("Scav");
 		if (scav_count < 0)
 		{
 			std::cout << std::endl;
 			return;
 		}
-		Game g(clap_count, scav_count);
+		int frag_count = getTeamSize("Frag");
+		if (frag_count < 0)
+		{
+			std::cout << std::endl;
+			return;
+		}
+		Game g(scav_count, frag_count);
 		g.run();
 	}
 	catch (const std::exception &e)
@@ -59,7 +58,7 @@ static int getTeamSize(const std::string &team_name)
 			if (std::cin.eof())
 				return (-1);
 			else
-				throw std::ios_base::failure("Failed to output.");
+				throw std::ios_base::failure("Failed to input.");
 		}
 		if (input.empty() || input == "1")
 			return (1);
@@ -74,46 +73,45 @@ static int getTeamSize(const std::string &team_name)
 	}
 }
 
-Game::Game(int clap_count, int scav_count)
-	: _claps(NULL), _scavs(NULL), _clap_count(clap_count),
-	  _scav_count(scav_count)
+Game::Game(int scav_count, int frag_count)
+	: _scavs(NULL), _frags(NULL), _scav_count(scav_count), _frag_count(frag_count)
 {
 	try
 	{
-		_claps = new ClapTrap *[clap_count];
-		for (int i = 0; i < clap_count; ++i)
-			_claps[i] = NULL;
-
-		_scavs = new ScavTrap *[scav_count];
+		_scavs = new ScavTrap*[scav_count];
 		for (int i = 0; i < scav_count; ++i)
 			_scavs[i] = NULL;
 
-		for (int i = 0; i < clap_count; ++i)
-		{
-			std::stringstream ss;
-			ss << i;
-			_claps[i] = new ClapTrap("Clap" + ss.str());
-		}
+		_frags = new FragTrap*[frag_count];
+		for (int i = 0; i < frag_count; ++i)
+			_frags[i] = NULL;
+
 		for (int i = 0; i < scav_count; ++i)
 		{
 			std::stringstream ss;
 			ss << i;
 			_scavs[i] = new ScavTrap("Scav" + ss.str());
 		}
+		for (int i = 0; i < frag_count; ++i)
+		{
+			std::stringstream ss;
+			ss << i;
+			_frags[i] = new FragTrap("Frag" + ss.str());
+		}
 	}
 	catch (...)
 	{
-		if (_claps != NULL)
-		{
-			for (int i = 0; i < clap_count; ++i)
-				delete _claps[i];
-			delete[] _claps;
-		}
 		if (_scavs != NULL)
 		{
 			for (int i = 0; i < scav_count; ++i)
 				delete _scavs[i];
 			delete[] _scavs;
+		}
+		if (_frags != NULL)
+		{
+			for (int i = 0; i < frag_count; ++i)
+				delete _frags[i];
+			delete[] _frags;
 		}
 		throw;
 	}
@@ -121,12 +119,12 @@ Game::Game(int clap_count, int scav_count)
 
 Game::~Game()
 {
-	for (int i = 0; i < _clap_count; ++i)
-		delete _claps[i];
-	delete[] _claps;
 	for (int i = 0; i < _scav_count; ++i)
 		delete _scavs[i];
 	delete[] _scavs;
+	for (int i = 0; i < _frag_count; ++i)
+		delete _frags[i];
+	delete[] _frags;
 }
 
 void Game::run()
@@ -139,15 +137,15 @@ void Game::run()
 	int turn = 1;
 	while (!isOver())
 	{
-		std::cout << "======================================== " << "TURN "
-				  << turn++
+		std::cout << "======================================== "
+				  << "TURN " << turn++
 				  << " ========================================" << std::endl;
-		if (!clapTurn())
+		if (!scavTurn())
 			break;
 		std::cout << std::endl;
 		printStatus();
 		std::cout << std::endl;
-		if (!scavTurn())
+		if (!fragTurn())
 			break;
 		std::cout << std::endl;
 		printStatus();
@@ -158,15 +156,6 @@ void Game::run()
 
 void Game::printStatus() const
 {
-	std::cout << "========== Team Clap ==========" << std::endl;
-	for (int i = 0; i < _clap_count; ++i)
-	{
-		unsigned int hp = _claps[i]->getHitPoints();
-		std::cout << " " << std::setw(6) << _claps[i]->getName() << "  HP "
-				  << std::setw(3) << hp << " [" << hpBar(hp, 10) << "]"
-				  << "  EP " << std::setw(2) << _claps[i]->getEnergyPoints()
-				  << (hp == 0 ? "  [DEAD]" : "") << std::endl;
-	}
 	std::cout << "========== Team Scav ==========" << std::endl;
 	for (int i = 0; i < _scav_count; ++i)
 	{
@@ -174,6 +163,15 @@ void Game::printStatus() const
 		std::cout << " " << std::setw(6) << _scavs[i]->getName() << "  HP "
 				  << std::setw(3) << hp << " [" << hpBar(hp, 100) << "]"
 				  << "  EP " << std::setw(2) << _scavs[i]->getEnergyPoints()
+				  << (hp == 0 ? "  [DEAD]" : "") << std::endl;
+	}
+	std::cout << "========== Team Frag ==========" << std::endl;
+	for (int i = 0; i < _frag_count; ++i)
+	{
+		unsigned int hp = _frags[i]->getHitPoints();
+		std::cout << " " << std::setw(6) << _frags[i]->getName() << "  HP "
+				  << std::setw(3) << hp << " [" << hpBar(hp, 100) << "]"
+				  << "  EP " << std::setw(2) << _frags[i]->getEnergyPoints()
 				  << (hp == 0 ? "  [DEAD]" : "") << std::endl;
 	}
 	std::cout << "=================================" << std::endl;
@@ -193,13 +191,6 @@ bool Game::isOver() const
 {
 	int alive_team = 0;
 
-	int clap_dead = 0;
-	for (int i = 0; i < _clap_count; ++i)
-		if (_claps[i]->getHitPoints() == 0)
-			++clap_dead;
-	if (clap_dead != _clap_count)
-		alive_team++;
-
 	int scav_dead = 0;
 	for (int i = 0; i < _scav_count; ++i)
 		if (_scavs[i]->getHitPoints() == 0)
@@ -207,91 +198,36 @@ bool Game::isOver() const
 	if (scav_dead != _scav_count)
 		alive_team++;
 
+	int frag_dead = 0;
+	for (int i = 0; i < _frag_count; ++i)
+		if (_frags[i]->getHitPoints() == 0)
+			++frag_dead;
+	if (frag_dead != _frag_count)
+		alive_team++;
+
 	return (alive_team <= 1);
-}
-
-bool Game::clapTurn(void)
-{
-	std::string input;
-	e_action action;
-	int actor = rand() % _clap_count;
-
-	// 行動を入力
-	std::cout
-		<< "[Clap action] Enter: random | 0: attack | 1: beRepaired | q: exit"
-		<< std::endl;
-	std::cout << "Clap> ";
-	if (!std::cout || !std::getline(std::cin, input))
-	{
-		return (false);
-	}
-	std::cout << std::endl;
-
-	// 中断
-	if (input == "q")
-	{
-		std::cout << "EXIT" << std::endl;
-		return (false);
-	}
-
-	// 行動を選択
-	if (input == "0")
-		action = ATTACK;
-	else if (input == "1")
-		action = BE_REPAIRED;
-	else
-		action = (e_action)(rand() % 2);
-
-	// 実行
-	if (action == ATTACK)
-	{
-		int target = rand() % _scav_count;
-
-		std::cout << _claps[actor]->getName() << "->attack("
-				  << _scavs[target]->getName() << ")" << std::endl;
-		_claps[actor]->attack(_scavs[target]->getName());
-
-		std::cout << std::endl;
-
-		std::cout << _scavs[target]->getName() << "->takeDamage("
-				  << _claps[actor]->getAttackDamage() << ")" << std::endl;
-		_scavs[target]->takeDamage(_claps[actor]->getAttackDamage());
-	}
-	else if (action == BE_REPAIRED)
-	{
-		unsigned int amount = rand() % 10 + 1;
-		std::cout << _claps[actor]->getName() << "->beRepaired(" << amount
-				  << ")" << std::endl;
-		_claps[actor]->beRepaired(amount);
-	}
-	return (true);
 }
 
 bool Game::scavTurn(void)
 {
 	std::string input;
-	e_action action;
-	int actor = rand() % _scav_count;
+	e_action    action;
+	int         actor = rand() % _scav_count;
 
-	// 行動を入力
 	std::cout << "[Scav action] Enter: random | 0: attack | 1: beRepaired | 2: "
 				 "guardGate | q: exit"
 			  << std::endl;
 	std::cout << "Scav> ";
 	if (!std::cout || !std::getline(std::cin, input))
-	{
 		return (false);
-	}
 	std::cout << std::endl;
 
-	// 中断
 	if (input == "q")
 	{
 		std::cout << "EXIT" << std::endl;
 		return (false);
 	}
 
-	// 行動を選択
 	if (input == "0")
 		action = ATTACK;
 	else if (input == "1")
@@ -301,33 +237,83 @@ bool Game::scavTurn(void)
 	else
 		action = (e_action)(rand() % 3);
 
-	// 実行
 	if (action == ATTACK)
 	{
-		int target = rand() % _clap_count;
-
+		int target = rand() % _frag_count;
 		std::cout << _scavs[actor]->getName() << "->attack("
-				  << _claps[target]->getName() << ")" << std::endl;
-		_scavs[actor]->attack(_claps[target]->getName());
-
+				  << _frags[target]->getName() << ")" << std::endl;
+		_scavs[actor]->attack(_frags[target]->getName());
 		std::cout << std::endl;
-
-		std::cout << _claps[target]->getName() << "->takeDamage("
+		std::cout << _frags[target]->getName() << "->takeDamage("
 				  << _scavs[actor]->getAttackDamage() << ")" << std::endl;
-		_claps[target]->takeDamage(_scavs[actor]->getAttackDamage());
+		_frags[target]->takeDamage(_scavs[actor]->getAttackDamage());
 	}
 	else if (action == BE_REPAIRED)
 	{
 		unsigned int amount = rand() % 10 + 1;
-
-		std::cout << _scavs[actor]->getName() << "->beRepaired(" << amount
-				  << ")" << std::endl;
+		std::cout << _scavs[actor]->getName() << "->beRepaired(" << amount << ")"
+				  << std::endl;
 		_scavs[actor]->beRepaired(amount);
 	}
 	else
 	{
 		std::cout << _scavs[actor]->getName() << "->guardGate()" << std::endl;
 		_scavs[actor]->guardGate();
+	}
+	return (true);
+}
+
+bool Game::fragTurn(void)
+{
+	std::string input;
+	e_action    action;
+	int         actor = rand() % _frag_count;
+
+	std::cout << "[Frag action] Enter: random | 0: attack | 1: beRepaired | 2: "
+				 "highFivesGuys | q: exit"
+			  << std::endl;
+	std::cout << "Frag> ";
+	if (!std::cout || !std::getline(std::cin, input))
+		return (false);
+	std::cout << std::endl;
+
+	if (input == "q")
+	{
+		std::cout << "EXIT" << std::endl;
+		return (false);
+	}
+
+	if (input == "0")
+		action = ATTACK;
+	else if (input == "1")
+		action = BE_REPAIRED;
+	else if (input == "2")
+		action = SPECIAL_ABILITY;
+	else
+		action = (e_action)(rand() % 3);
+
+	if (action == ATTACK)
+	{
+		int target = rand() % _scav_count;
+		std::cout << _frags[actor]->getName() << "->attack("
+				  << _scavs[target]->getName() << ")" << std::endl;
+		_frags[actor]->attack(_scavs[target]->getName());
+		std::cout << std::endl;
+		std::cout << _scavs[target]->getName() << "->takeDamage("
+				  << _frags[actor]->getAttackDamage() << ")" << std::endl;
+		_scavs[target]->takeDamage(_frags[actor]->getAttackDamage());
+	}
+	else if (action == BE_REPAIRED)
+	{
+		unsigned int amount = rand() % 10 + 1;
+		std::cout << _frags[actor]->getName() << "->beRepaired(" << amount << ")"
+				  << std::endl;
+		_frags[actor]->beRepaired(amount);
+	}
+	else
+	{
+		std::cout << _frags[actor]->getName() << "->highFivesGuys()" << std::endl;
+		_frags[actor]->highFivesGuys();
 	}
 	return (true);
 }
