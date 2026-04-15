@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 00:39:57 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/15 16:49:26 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/15 23:23:27 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 int main(void)
 {
 	{
-		std::cout << "==================== Tom ====================" <<
-std::endl; 		DiamondTrap Tom; 		Tom = DiamondTrap("Tom");
-std::cout << std::endl; 		Tom.attack("Alice"); 		Tom.attack("Alice");
+		std::cout << "==================== Tom ====================" << std::endl;
+		DiamondTrap Tom;
+		Tom = DiamondTrap("Tom");
+		std::cout << std::endl;
+		Tom.attack("Alice");
+		Tom.attack("Alice");
 		Tom.attack("Alice");
 		Tom.whoAmI();
 		Tom.guardGate();
@@ -40,9 +43,12 @@ std::cout << std::endl; 		Tom.attack("Alice"); 		Tom.attack("Alice");
 	std::cout << std::endl;
 
 	{
-		std::cout << "==================== Bill ====================" <<
-std::endl; 		DiamondTrap Bill(DiamondTrap("Bill")); 		std::cout <<
-std::endl; 		Bill.takeDamage(20); 		Bill.attack("Alice"); 		Bill.beRepaired(20);
+		std::cout << "==================== Bill ====================" << std::endl;
+		DiamondTrap Bill(DiamondTrap("Bill"));
+		std::cout << std::endl;
+		Bill.takeDamage(20);
+		Bill.attack("Alice");
+		Bill.beRepaired(20);
 		Bill.attack("Alice");
 		Bill.takeDamage(20);
 		Bill.attack("Alice");

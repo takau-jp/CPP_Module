@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:38 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 19:30:03 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/15 23:25:20 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ class ClapTrap
 			 unsigned int energy_points, unsigned int attack_damage);
 	bool isAlive(void) const;
 	bool useEnergyPoints(void);
-	void setHitPoints(unsigned int hit_points);
-	void setEnergyPoints(unsigned int energy_points);
 	void loseHitPoints(unsigned int amount);
 	void gainHitPoints(unsigned int amount);
 

@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 23:26:43 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/09 22:00:04 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/15 23:25:34 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,16 +170,6 @@ unsigned int ClapTrap::getEnergyPoints(void) const
 unsigned int ClapTrap::getAttackDamage(void) const
 {
 	return (this->_attack_damage);
-}
-
-void ClapTrap::setHitPoints(unsigned int hit_points)
-{
-	this->_hit_points = hit_points;
-}
-
-void ClapTrap::setEnergyPoints(unsigned int energy_points)
-{
-	this->_energy_points = energy_points;
 }
 
 bool ClapTrap::isAlive(void) const
