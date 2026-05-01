@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Point.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/05 21:27:45 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/16 10:02:13 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/04/15 23:27:09 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/04/16 21:31:37 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_HPP
-# define POINT_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-# include "Fixed.hpp"
+#include <string.h>
 
-class Point
+class WrongAnimal
 {
-	private:
-		const Fixed	x;
-		const Fixed	y;
-	public:
-		Point();
-		Point(const float x, const float y);
-		Point(const Point &other);
-		~Point();
-		Point &operator=(const Point &other);
-		const Fixed	&getX() const;
-		const Fixed	&getY() const;
+  protected:
+	std::string type;
+
+	explicit WrongAnimal(const std::string &type);
+
+  public:
+	WrongAnimal();
+	WrongAnimal(const WrongAnimal &other);
+	WrongAnimal &operator=(const WrongAnimal &other);
+	virtual ~WrongAnimal();
+	void makeSound() const;
+	const std::string &getType() const;
 };
 
 #endif

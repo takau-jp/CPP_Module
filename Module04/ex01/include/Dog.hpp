@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Point.hpp                                          :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/05 21:27:45 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/16 10:02:13 by stanaka2         ###   ########.fr       */
+/*   Created: 2026/04/15 23:18:48 by stanaka2          #+#    #+#             */
+/*   Updated: 2026/04/18 16:25:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_HPP
-# define POINT_HPP
+#ifndef DOG_HPP
+#define DOG_HPP
 
-# include "Fixed.hpp"
+#include <string>
 
-class Point
+#include "Animal.hpp"
+#include "Brain.hpp"
+
+class Dog : public Animal
 {
-	private:
-		const Fixed	x;
-		const Fixed	y;
-	public:
-		Point();
-		Point(const float x, const float y);
-		Point(const Point &other);
-		~Point();
-		Point &operator=(const Point &other);
-		const Fixed	&getX() const;
-		const Fixed	&getY() const;
+  private:
+	Brain *_brain;
+
+  public:
+	Dog();
+	Dog(const Dog &other);
+	Dog &operator=(const Dog &other);
+	virtual ~Dog();
+	virtual void makeSound() const;
+	virtual void memorize(const std::string &idea);
+	virtual void speak(unsigned int ideas_ago) const;
 };
 
 #endif

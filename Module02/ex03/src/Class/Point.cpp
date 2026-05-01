@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 21:00:04 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/05 22:39:41 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:39:09 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ Point::~Point()
 
 Point &Point::operator=(const Point &other)
 {
-	if (this == &other)
+	if (this != &other)
 	{
-		this->x = other.x;
-		this->y = other.y;
+		this->~Point();
+		new (this) Point(other);
 	}
 	return (*this);
 }
