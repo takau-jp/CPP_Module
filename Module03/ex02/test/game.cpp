@@ -74,15 +74,16 @@ static int getTeamSize(const std::string &team_name)
 }
 
 Game::Game(int scav_count, int frag_count)
-	: _scavs(NULL), _frags(NULL), _scav_count(scav_count), _frag_count(frag_count)
+	: _scavs(NULL), _frags(NULL), _scav_count(scav_count),
+	  _frag_count(frag_count)
 {
 	try
 	{
-		_scavs = new ScavTrap*[scav_count];
+		_scavs = new ScavTrap *[scav_count];
 		for (int i = 0; i < scav_count; ++i)
 			_scavs[i] = NULL;
 
-		_frags = new FragTrap*[frag_count];
+		_frags = new FragTrap *[frag_count];
 		for (int i = 0; i < frag_count; ++i)
 			_frags[i] = NULL;
 
@@ -211,8 +212,8 @@ bool Game::isOver() const
 bool Game::scavTurn(void)
 {
 	std::string input;
-	e_action    action;
-	int         actor = rand() % _scav_count;
+	e_action action;
+	int actor = rand() % _scav_count;
 
 	std::cout << "[Scav action] Enter: random | 0: attack | 1: beRepaired | 2: "
 				 "guardGate | q: exit"
@@ -251,8 +252,8 @@ bool Game::scavTurn(void)
 	else if (action == BE_REPAIRED)
 	{
 		unsigned int amount = rand() % 10 + 1;
-		std::cout << _scavs[actor]->getName() << "->beRepaired(" << amount << ")"
-				  << std::endl;
+		std::cout << _scavs[actor]->getName() << "->beRepaired(" << amount
+				  << ")" << std::endl;
 		_scavs[actor]->beRepaired(amount);
 	}
 	else
@@ -266,8 +267,8 @@ bool Game::scavTurn(void)
 bool Game::fragTurn(void)
 {
 	std::string input;
-	e_action    action;
-	int         actor = rand() % _frag_count;
+	e_action action;
+	int actor = rand() % _frag_count;
 
 	std::cout << "[Frag action] Enter: random | 0: attack | 1: beRepaired | 2: "
 				 "highFivesGuys | q: exit"
@@ -306,13 +307,14 @@ bool Game::fragTurn(void)
 	else if (action == BE_REPAIRED)
 	{
 		unsigned int amount = rand() % 10 + 1;
-		std::cout << _frags[actor]->getName() << "->beRepaired(" << amount << ")"
-				  << std::endl;
+		std::cout << _frags[actor]->getName() << "->beRepaired(" << amount
+				  << ")" << std::endl;
 		_frags[actor]->beRepaired(amount);
 	}
 	else
 	{
-		std::cout << _frags[actor]->getName() << "->highFivesGuys()" << std::endl;
+		std::cout << _frags[actor]->getName() << "->highFivesGuys()"
+				  << std::endl;
 		_frags[actor]->highFivesGuys();
 	}
 	return (true);

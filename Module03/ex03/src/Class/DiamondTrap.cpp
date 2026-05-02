@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 21:09:53 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 19:26:21 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/05/02 20:44:06 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,59 +59,6 @@ DiamondTrap::~DiamondTrap()
 			  << ": Destructor has been called" << std::endl;
 }
 
-void DiamondTrap::takeDamage(unsigned int amount)
-{
-	if (!isAlive())
-	{
-		printDead();
-		return;
-	}
-
-	loseHitPoints(amount);
-
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( ;ω; )  * OUCH!" << std::endl;
-	std::cout << "  /|  |\\" << std::endl;
-	std::cout << " (_|  |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "DiamondTrap: " << this->_name << " takes " << amount;
-	if (amount <= 1)
-		std::cout << " point of damage!" << std::endl;
-	else
-		std::cout << " points of damage!" << std::endl;
-}
-
-void DiamondTrap::beRepaired(unsigned int amount)
-{
-	if (!isAlive())
-	{
-		printDead();
-		return;
-	}
-	if (!useEnergyPoints())
-	{
-		printNoEnergy();
-		return;
-	}
-
-	gainHitPoints(amount);
-
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( ^ω^ )  purr..." << std::endl;
-	std::cout << "  /| + |\\" << std::endl;
-	std::cout << " (_|   |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "DiamondTrap: " << this->_name << " repaires " << amount;
-	if (amount <= 1)
-		std::cout << " point of hit points!" << std::endl;
-	else
-		std::cout << " points of hit points!" << std::endl;
-}
-
 void DiamondTrap::whoAmI(void)
 {
 	if (!isAlive())
@@ -141,19 +88,6 @@ void DiamondTrap::printDead(void) const
 	std::cout << std::endl;
 
 	std::cout << "DiamondTrap: " << this->_name << " is dead!" << std::endl;
-}
-
-void DiamondTrap::printNoEnergy(void) const
-{
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( -ω-)  zzz..." << std::endl;
-	std::cout << "  /|   |\\" << std::endl;
-	std::cout << " (_|   |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "DiamondTrap: " << this->_name
-			  << " doesn't have any energy point!" << std::endl;
 }
 
 const std::string &DiamondTrap::getName(void) const

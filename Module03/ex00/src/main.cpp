@@ -52,7 +52,7 @@ int main(void)
 		// std::cout << "HP: " << Bill.getHitPoints() << std::endl;
 		// Bill.takeDamage(std::numeric_limits<unsigned int>::max());
 		// std::cout << "HP: " << Bill.getHitPoints() << std::endl;
-		
+
 		Bill.takeDamage(8);
 		std::cout << "HP: " << Bill.getHitPoints() << std::endl;
 		Bill.attack("Alice");

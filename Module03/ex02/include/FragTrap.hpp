@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:48:50 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 19:31:55 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/05/02 20:36:59 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class FragTrap : public ClapTrap
 {
   private:
 	void printDead(void) const;
-	void printNoEnergy(void) const;
 
   public:
 	FragTrap();
@@ -30,9 +29,6 @@ class FragTrap : public ClapTrap
 	FragTrap &operator=(const FragTrap &other);
 	virtual ~FragTrap();
 
-	void attack(const std::string &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	void highFivesGuys(void);
 };
 

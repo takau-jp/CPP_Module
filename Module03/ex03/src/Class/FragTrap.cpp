@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:49:22 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 17:58:32 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/05/02 20:44:44 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,87 +55,6 @@ FragTrap::~FragTrap()
 			  << ": Destructor has been called" << std::endl;
 }
 
-void FragTrap::attack(const std::string &target)
-{
-	if (!isAlive())
-	{
-		printDead();
-		return;
-	}
-	if (!useEnergyPoints())
-	{
-		printNoEnergy();
-		return;
-	}
-
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\          /\\_/\\" << std::endl;
-	std::cout << "  ( >`ω´<)ﾉ <<*  ( ;ω; )" << std::endl;
-	std::cout << "  /|    \\        /|  |\\" << std::endl;
-	std::cout << " (_|    _)      (_|  |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "FragTrap: " << this->getName() << " attacks " << target
-			  << ", causing " << this->getAttackDamage();
-	if (this->getAttackDamage() <= 1)
-		std::cout << " point of damage!" << std::endl;
-	else
-		std::cout << " points of damage!" << std::endl;
-}
-
-void FragTrap::takeDamage(unsigned int amount)
-{
-	if (!isAlive())
-	{
-		printDead();
-		return;
-	}
-
-	loseHitPoints(amount);
-
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( ;ω; )  * OUCH!" << std::endl;
-	std::cout << "  /|  |\\" << std::endl;
-	std::cout << " (_|  |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "FragTrap: " << this->getName() << " takes " << amount;
-	if (amount <= 1)
-		std::cout << " point of damage!" << std::endl;
-	else
-		std::cout << " points of damage!" << std::endl;
-}
-
-void FragTrap::beRepaired(unsigned int amount)
-{
-	if (!isAlive())
-	{
-		printDead();
-		return;
-	}
-	if (!useEnergyPoints())
-	{
-		printNoEnergy();
-		return;
-	}
-
-	gainHitPoints(amount);
-
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( ^ω^ )  purr..." << std::endl;
-	std::cout << "  /| + |\\" << std::endl;
-	std::cout << " (_|   |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "FragTrap: " << this->getName() << " repaires " << amount;
-	if (amount <= 1)
-		std::cout << " point of hit points!" << std::endl;
-	else
-		std::cout << " points of hit points!" << std::endl;
-}
-
 void FragTrap::highFivesGuys(void)
 {
 	if (!isAlive())
@@ -165,17 +84,4 @@ void FragTrap::printDead(void) const
 	std::cout << std::endl;
 
 	std::cout << "FragTrap: " << this->getName() << " is dead!" << std::endl;
-}
-
-void FragTrap::printNoEnergy(void) const
-{
-	std::cout << std::endl;
-	std::cout << "   /\\_/\\" << std::endl;
-	std::cout << "  ( -ω-)  zzz..." << std::endl;
-	std::cout << "  /|   |\\" << std::endl;
-	std::cout << " (_|   |_)" << std::endl;
-	std::cout << std::endl;
-
-	std::cout << "FragTrap: " << this->getName()
-			  << " doesn't have any energy point!" << std::endl;
 }

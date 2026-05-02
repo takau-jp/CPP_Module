@@ -6,7 +6,7 @@
 /*   By: stanaka2 <stanaka2@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 22:41:42 by stanaka2          #+#    #+#             */
-/*   Updated: 2026/04/14 19:31:39 by stanaka2         ###   ########.fr       */
+/*   Updated: 2026/05/02 20:40:37 by stanaka2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ class ScavTrap : virtual public ClapTrap
 	virtual ~ScavTrap();
 
 	void attack(const std::string &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	void guardGate();
 };
 

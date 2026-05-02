@@ -17,7 +17,8 @@
 int main(void)
 {
 	{
-		std::cout << "==================== Tom ====================" << std::endl;
+		std::cout << "==================== Tom ===================="
+				  << std::endl;
 		DiamondTrap Tom;
 		Tom = DiamondTrap("Tom");
 		std::cout << std::endl;
@@ -43,7 +44,8 @@ int main(void)
 	std::cout << std::endl;
 
 	{
-		std::cout << "==================== Bill ====================" << std::endl;
+		std::cout << "==================== Bill ===================="
+				  << std::endl;
 		DiamondTrap Bill(DiamondTrap("Bill"));
 		std::cout << std::endl;
 		Bill.takeDamage(20);
